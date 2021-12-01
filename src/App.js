@@ -1,23 +1,53 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
+import Search from "./components/Search/Search";
+import {
+  featchWeathers,
+  locationFeatchWeathers,
+} from "./redux/weather/weatherOptions";
 
 function App() {
+  const dispatch = useDispatch();
+  const [citySearch, setCitySearch] = useState("");
+
+  useEffect(() => {
+    navigator.geolocation.getCurrentPosition(
+      function (position) {
+        var lat = position.coords.latitude;
+        var lng = position.coords.longitude;
+        dispatch(locationFeatchWeathers(lat, lng));
+      },
+      function (error) {
+        console.log(error.message);
+      }
+    );
+  }, []);
+
+  const fetchData = (e) => {
+    e.preventDefault();
+    const city = e.target.elements.city.value;
+    dispatch(featchWeathers(city))
+      .then(() => {
+        setCitySearch("");
+      })
+      .catch((errorMassage) => {
+        alert(errorMassage);
+        setCitySearch("");
+      });
+  };
+
+  const handleSearch = (e) => {
+    setCitySearch(e.target.value);
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="container-xl">
+      <h1 className="border-bottom pb-2">Weather in your city</h1>
+      <Search
+        getWeather={fetchData}
+        citySearch={citySearch}
+        handleSearch={handleSearch}
+      />
     </div>
   );
 }

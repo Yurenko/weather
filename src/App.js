@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import HistorySearch from "./components/HistorySearch/HistorySearch";
 import Loader from "./components/Loader/Loader";
 import Search from "./components/Search/Search";
+import "./App.css";
 import {
   featchWeathers,
   locationFeatchWeathers,

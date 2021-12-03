@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import HistorySearch from "./components/HistorySearch/HistorySearch";
+import Loader from "./components/Loader/Loader";
 import Search from "./components/Search/Search";
 import {
   featchWeathers,
@@ -7,14 +9,18 @@ import {
 } from "./redux/weather/weatherOptions";
 
 function App() {
-  const dispatch = useDispatch();
   const [citySearch, setCitySearch] = useState("");
+  const item = useSelector((state) => state.weatherReduser.data);
+  const isLoading = useSelector((state) => state.weatherReduser.isLoading);
+  const error = useSelector((state) => state.weatherReduser.error);
+
+  const dispatch = useDispatch();
 
   useEffect(() => {
     navigator.geolocation.getCurrentPosition(
       function (position) {
-        var lat = position.coords.latitude;
-        var lng = position.coords.longitude;
+        let lat = position.coords.latitude;
+        let lng = position.coords.longitude;
         dispatch(locationFeatchWeathers(lat, lng));
       },
       function (error) {
@@ -26,14 +32,9 @@ function App() {
   const fetchData = (e) => {
     e.preventDefault();
     const city = e.target.elements.city.value;
-    dispatch(featchWeathers(city))
-      .then(() => {
-        setCitySearch("");
-      })
-      .catch((errorMassage) => {
-        alert(errorMassage);
-        setCitySearch("");
-      });
+    dispatch(featchWeathers(city)).then(() => {
+      setCitySearch("");
+    });
   };
 
   const handleSearch = (e) => {
@@ -41,13 +42,18 @@ function App() {
   };
 
   return (
-    <div className="container-xl">
-      <h1 className="border-bottom pb-2">Weather in your city</h1>
+    <div>
+      <h1 className="container-xl border-bottom pb-2">Weather in your city</h1>
       <Search
         getWeather={fetchData}
         citySearch={citySearch}
         handleSearch={handleSearch}
       />
+      {isLoading ? (
+        <Loader />
+      ) : (
+        !error && <HistorySearch lastHistorySearch={item} />
+      )}
     </div>
   );
 }

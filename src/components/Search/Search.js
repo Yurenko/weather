@@ -16,7 +16,7 @@ const Search = ({ getWeather, citySearch, handleSearch }) => {
             id="input"
           />
         </div>
-        <button className="btn btn-primary" id="search" type="submit">
+        <button className="btn btn-primary" id="btnSearch" type="submit">
           Search
         </button>
       </div>

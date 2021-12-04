@@ -1,7 +1,6 @@
 export const ActionsType = {
   WEATHER_FEATCH_START: "WEATHER_FEATCH_START",
   WEATHER_FEATCH_SUCCESS: "WEATHER_FEATCH_SUCCESS",
-  LOCATION_WEATHER_FEATCH_SUCCESS: "LOCATION_WEATHER_FEATCH_SUCCESS",
   WEATHER_FEATCH_ERROR: "WEATHER_FEATCH_ERROR",
   WEATHER_LOADING: "WEATHER_LOADING",
   WEATHER_FEATCH_FOR_FIVE_DAYS: "WEATHER_FEATCH_FOR_FIVE_DAYS",
@@ -13,11 +12,6 @@ export const featchWeatherStart = () => ({
 
 export const featchWeatherSuccess = (data) => ({
   type: ActionsType.WEATHER_FEATCH_SUCCESS,
-  payload: data,
-});
-
-export const locationFeatchWeatherSuccess = (data) => ({
-  type: ActionsType.LOCATION_WEATHER_FEATCH_SUCCESS,
   payload: data,
 });
 

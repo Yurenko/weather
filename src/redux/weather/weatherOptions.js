@@ -3,7 +3,6 @@ import {
   featchWeatherError,
   featchWeatherSuccess,
   loadingWeather,
-  locationFeatchWeatherSuccess,
 } from "./weatherActions";
 
 export const locationFeatchWeathers = (lat, lng) => async (dispatch) => {
@@ -14,7 +13,7 @@ export const locationFeatchWeathers = (lat, lng) => async (dispatch) => {
     .then((res) => res.json())
     .then((data) => {
       if (data.cod === 200) {
-        dispatch(locationFeatchWeatherSuccess(data));
+        dispatch(featchWeatherSuccess(data));
       } else {
         dispatch(featchWeatherError(data.message));
         throw new Error(data.message);

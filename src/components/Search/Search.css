@@ -8,7 +8,7 @@
     border: none;
 }
 
-.btnSearch:hover {
+.btnSearch:hover, .btnSearch:focus {
     background-color: #42bd46;
 }
 

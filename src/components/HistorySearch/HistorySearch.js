@@ -2,14 +2,19 @@ import React from "react";
 import "./HistorySearch.css";
 import ItemHistory from "./ItemHistory";
 
-const HistorySearch = ({ lastHistorySearch }) => {
-  console.log(lastHistorySearch);
+const HistorySearch = ({ items, handleClickCity, handleClickCords }) => {
+  console.log("h", items);
   return (
     <div className="container-xl">
-      {lastHistorySearch &&
-        lastHistorySearch
+      {items &&
+        items
           .map((item, index) => (
-            <ItemHistory key={item.id + index} item={item} />
+            <ItemHistory
+              key={item.id + index}
+              item={item}
+              handleClickCity={handleClickCity}
+              handleClickCords={handleClickCords}
+            />
           ))
           .reverse()}
     </div>

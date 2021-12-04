@@ -11,7 +11,7 @@ import {
 
 function App() {
   const [citySearch, setCitySearch] = useState("");
-  const item = useSelector((state) => state.weatherReduser.data);
+  const items = useSelector((state) => state.weatherReduser.data);
   const isLoading = useSelector((state) => state.weatherReduser.isLoading);
   const error = useSelector((state) => state.weatherReduser.error);
 
@@ -28,7 +28,7 @@ function App() {
         console.log(error.message);
       }
     );
-  }, []);
+  }, [dispatch]);
 
   const fetchData = (e) => {
     e.preventDefault();
@@ -42,6 +42,14 @@ function App() {
     setCitySearch(e.target.value);
   };
 
+  const handleClickCity = (city) => {
+    dispatch(featchWeathers(city));
+  };
+
+  const handleClickCords = (lat, lng) => {
+    dispatch(locationFeatchWeathers(lat, lng));
+  };
+
   return (
     <div>
       <h1 className="container-xl border-bottom pb-2">Weather in your city</h1>
@@ -53,7 +61,13 @@ function App() {
       {isLoading ? (
         <Loader />
       ) : (
-        !error && <HistorySearch lastHistorySearch={item} />
+        !error && (
+          <HistorySearch
+            items={items}
+            handleClickCity={handleClickCity}
+            handleClickCords={handleClickCords}
+          />
+        )
       )}
     </div>
   );

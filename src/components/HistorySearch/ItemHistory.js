@@ -1,9 +1,8 @@
 import React from "react";
-import { NavLink } from "react-router-dom";
 import "./ItemHistory.css";
 import classnames from "classnames";
 
-const ItemHistory = ({ item }) => {
+const ItemHistory = ({ item, handleClickCity, handleClickCords }) => {
   const icon = `http://openweathermap.org/img/wn/${item.weather[0].icon}.png`;
   const temp = (info) => Math.round((info - 273.15) * 100) / 100;
 
@@ -14,17 +13,17 @@ const ItemHistory = ({ item }) => {
       </div>
       <div className="p-3">
         <h4>
-          <NavLink
-            to="/"
-            className="text-decoration-none text-underline-hover country"
+          <button
+            className="text-decoration-none text-underline-hover city"
+            onClick={() => handleClickCity(item.name)}
           >
             {item.name}, {item.sys.country}
-          </NavLink>
+          </button>
           <span> {item.weather[0].description}</span>
         </h4>
         <span
           className={classnames("rounded-pill temp", {
-            hot: temp(item.main.temp) >= 30,
+            hot: temp(item.main.temp) >= 8,
             norm: temp(item.main.temp) < 30 && temp(item.main.temp) > -10,
             cold: temp(item.main.temp) <= -10,
           })}
@@ -36,12 +35,12 @@ const ItemHistory = ({ item }) => {
         {item.clouds.all} %, {item.main.pressure} hpa
         <div>
           Geo coords{" "}
-          <NavLink
-            to="/"
+          <button
             className="text-decoration-none text-underline-hover cords"
+            onClick={() => handleClickCords(item.coord.lat, item.coord.lon)}
           >
-            [{item.coord.lon}, {item.coord.lat}]
-          </NavLink>
+            [{item.coord.lat}, {item.coord.lon}]
+          </button>
         </div>
       </div>
     </div>

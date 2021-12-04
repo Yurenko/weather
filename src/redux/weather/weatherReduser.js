@@ -12,8 +12,6 @@ const weatherReduser = (state = initialState, { type, payload }) => {
       return undefined;
     case ActionsType.WEATHER_FEATCH_SUCCESS:
       return { ...state, data: [...state.data, payload], error: "" };
-    case ActionsType.LOCATION_WEATHER_FEATCH_SUCCESS:
-      return { ...state, data: [payload], error: "" };
     case ActionsType.WEATHER_FEATCH_ERROR:
       return { ...state, data: {}, error: payload };
     case ActionsType.WEATHER_LOADING:

@@ -5,7 +5,7 @@ const Search = ({ getWeather, citySearch, handleSearch }) => {
   return (
     <form onSubmit={getWeather}>
       <div
-        className="d-flex justify-content-center align-items-center input-group pt-5 pb-5"
+        className="d-flex justify-content-center align-items-center input-group pt-5 pb-5 mb-4"
         id="search"
       >
         <div className="col-3 border-left-50">

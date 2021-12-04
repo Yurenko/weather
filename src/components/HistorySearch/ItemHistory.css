@@ -1,0 +1,29 @@
+.text-underline-hover:hover {
+    text-decoration: underline;
+}
+
+.temp {
+    padding: 0 7px;
+}
+
+.cords, .city {
+    color: #4ed853;
+    border: none;
+    background-color: Transparent;
+}
+
+.cords:hover, .city:hover {
+    color: #42bd46;
+}
+
+.hot {
+    background-color: #ff8c00;
+}
+
+.norm {
+    background-color: #fff700;
+}
+
+.cold {
+    background-color: #00ffff;
+}
